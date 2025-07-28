@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import pen from "../assets/pen.png";
 import can from "../assets/can.png";
 
 const AllGoals = () => {
+  const [goals, setGoals] = useState([]);
+
+  useEffect(()=> {
+    const fetchGoals = async () => {
+      try {
+        const getGoalApi = await fetch("https://goalweb-backend-xt0f.onrender.com/api/goals/all") 
+        const fetchGoalApi = await getGoalApi.json()
+        console.log(fetchGoalApi)
+        setGoals(fetchGoalApi)
+      } catch (err) {
+        console.log(err);
+        
+      }
+    };
+
+    fetchGoals();
+  }, [])
   return (
     <div className="mx-[100px] my-[32px]">
       <div className="flex items-center justify-between">
