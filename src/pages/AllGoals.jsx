@@ -3,39 +3,38 @@ import { Link } from "react-router-dom";
 import pen from "../assets/pen.png";
 import can from "../assets/can.png";
 import { toast } from "react-hot-toast";
+import { fetchAllGoals, deleteGoal } from "../api/goals";
+
 
 const AllGoals = () => {
   const [goals, setGoals] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchGoals = async () => {
-    try {
-      const res = await fetch("https://goalweb-backend-xt0f.onrender.com/api/goals/all");
-      const data = await res.json();
-      setGoals(data);
-    } catch (err) {
-      console.error("Failed to fetch goals:", err);
-    } finally {
-      setTimeout(() => setLoading(false), 1000);
-    }
-  };
+  // const fetchGoals = async () => {
+  //   try {
+  //     const res = await fetch("https://goalweb-backend-xt0f.onrender.com/api/goals/all");
+  //     const data = await res.json();
+  //     setGoals(data);
+  //   } catch (err) {
+  //     console.error("Failed to fetch goals:", err);
+  //   } finally {
+  //     setTimeout(() => setLoading(false), 1000);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchGoals();
+   useEffect(() => {
+    fetchAllGoals().then((data) => {
+      setGoals(data);
+      setLoading(false);
+    });
   }, []);
 
   const handleDelete = async (id) => {
-    try {
-      await fetch(`https://goalweb-backend-xt0f.onrender.com/api/goals/${id}/delete`, {
-        method: "DELETE",
-      });
-      fetchGoals();
-      toast.success("Goal Deleted Successfully!", { duration: 5000 });
-    } catch (error) {
-      toast.error("Failed to delete goal", { duration: 5000 });
-      console.error("Delete error:", error);
-    }
+    await deleteGoal(id);
+    toast.success("Deleted successfully");
+    setGoals((prev) => prev.filter((g) => g._id !== id));
   };
+
 
   if (loading) {
     return (
