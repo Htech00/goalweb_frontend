@@ -10,9 +10,7 @@ const OngoingPage = () => {
 
   const fetchOngoingGoals = async () => {
     try {
-      const response = await fetch(
-        "https://goalweb-backend-xt0f.onrender.com/api/goals/ongoing"
-      );
+      const response = await fetch("https://goalweb-backend-xt0f.onrender.com/api/goals/ongoing");
       const data = await response.json();
       setOngoingGoals(data);
     } catch (error) {
@@ -24,10 +22,9 @@ const OngoingPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(
-        `https://goalweb-backend-xt0f.onrender.com/api/goals/${id}/delete`,
-        { method: "DELETE" }
-      );
+      await fetch(`https://goalweb-backend-xt0f.onrender.com/api/goals/${id}/delete`, {
+        method: "DELETE",
+      });
       toast.success("Goal Deleted Successfully!", { duration: 5000 });
       fetchOngoingGoals();
     } catch (error) {
@@ -51,10 +48,7 @@ const OngoingPage = () => {
             fill="none"
           >
             <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="10" />
-            <path
-              d="M93 50a43 43 0 11-86 0 43 43 0 0186 0z"
-              fill="currentFill"
-            />
+            <path d="M93 50a43 43 0 11-86 0 43 43 0 0186 0z" fill="currentFill" />
           </svg>
           <span className="text-xl sm:text-2xl font-medium">Loading Ongoing Goals...</span>
         </div>
@@ -64,57 +58,61 @@ const OngoingPage = () => {
 
   if (ongoingGoals.length === 0) {
     return (
-      <div className="mx-[100px] my-[32px]">
-        <div className="flex items-center justify-between">
-          <h2 className="font-montserrat font-bold text-[36px] text-black m-0">
+      <div className="px-4 sm:px-8 md:px-16 lg:px-[100px] py-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <h2 className="font-montserrat font-bold text-2xl sm:text-3xl lg:text-[36px] text-black">
             Ongoing Goals
           </h2>
           <Link
             to="/newgoal"
-            className="no-underline font-montserrat font-semibold text-[20px] text-[#0585cd] cursor-pointer"
+            className="no-underline font-montserrat font-semibold text-[18px] sm:text-[20px] text-[#0585cd]"
           >
             + Create New Goals
           </Link>
         </div>
-        <div className="text-start px-[35px] my-[50px] pt-[24px] pb-[50px] shadow-[0_4px_4px_rgba(0,0,0,0.2)] flex flex-col gap-[35px]">
-          <p>You don't have any Ongoing goals</p>
+        <div className="text-start px-6 py-8 mt-10 shadow-md rounded-md">
+          <p>You don't have any ongoing goals.</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="mx-[100px] my-[32px]">
-      <div className="flex items-center justify-between">
-        <h2 className="font-montserrat font-bold text-[36px] text-black m-0">Ongoing</h2>
+    <div className="px-4 sm:px-8 md:px-16 lg:px-[100px] py-8">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <h2 className="font-montserrat font-bold text-2xl sm:text-3xl lg:text-[36px] text-black">Ongoing</h2>
         <Link
           to="/newgoal"
-          className="no-underline font-montserrat font-semibold text-[20px] text-[#0585cd] cursor-pointer"
+          className="no-underline font-montserrat font-semibold text-[18px] sm:text-[20px] text-[#0585cd]"
         >
           + Create New Goals
         </Link>
       </div>
 
-      {ongoingGoals.map(({ title, description, progress, _id }) => (
-        <div className="mt-[40px] flex flex-col gap-[60px]" key={_id}>
-          <div className="text-start px-[35px] pt-[24px] pb-[50px] shadow-[0_4px_4px_rgba(0,0,0,0.2)] flex flex-col gap-[35px]">
-            <div className="flex flex-col gap-[12px]">
-              <h3 className="font-montserrat font-semibold text-[28px] text-black m-0 break-words">
+      <div className="flex flex-col gap-10 mt-10">
+        {ongoingGoals.map(({ title, description, progress, _id }) => (
+          <div
+            key={_id}
+            className="text-start px-6 py-8 shadow-md rounded-md flex flex-col gap-8"
+          >
+            <div className="flex flex-col gap-2">
+              <h3 className="font-montserrat font-semibold text-xl sm:text-2xl text-black break-words">
                 {title.toUpperCase()}
               </h3>
-              <h4 className="font-montserrat font-semibold text-[20px] text-[#0585cd] m-0">
+              <h4 className="font-montserrat font-semibold text-base sm:text-lg text-[#0585cd]">
                 In Progress
               </h4>
-              <p className="font-montserrat font-normal text-[20px] leading-[24.38px] text-black/80 m-0 break-words">
+              <p className="font-montserrat font-normal text-base sm:text-lg text-black/80 leading-relaxed break-words">
                 {description}
               </p>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="w-[368px] flex flex-col items-start gap-[12px]">
-                <div className="flex justify-between w-full items-start">
-                  <p className="font-montserrat font-normal text-[16px] text-black/80 m-0">Progress</p>
-                  <p className="font-montserrat font-normal text-[16px] text-black/80 m-0">{progress}%</p>
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+              {/* Progress Bar */}
+              <div className="w-full max-w-md flex flex-col gap-2">
+                <div className="flex justify-between text-sm text-black/80">
+                  <span>Progress</span>
+                  <span>{progress}%</span>
                 </div>
                 <div className="w-full bg-[#d9d9d9] h-[12px] rounded-[10px]">
                   <div
@@ -124,33 +122,31 @@ const OngoingPage = () => {
                       backgroundColor:
                         progress < 50 ? "#ff0000cc" : progress < 70 ? "#fcca03" : "#339933",
                     }}
-                  />
+                  ></div>
                 </div>
               </div>
 
-              <div className="w-fit flex gap-[100px] cursor-pointer">
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   to={`/progress/${_id}`}
-                  className="no-underline flex items-center justify-center gap-[10px] rounded-[10px] p-[16px] bg-[#0585cd] cursor-pointer"
+                  className="flex items-center gap-2 px-4 py-3 rounded-lg bg-[#0585cd] text-white font-semibold text-base sm:text-lg hover:bg-[#0560a0] transition"
                 >
-                  <img src={pen} alt="Update icon" />
-                  <p className="font-montserrat font-semibold text-[20px] text-white m-0">
-                    Update Progress
-                  </p>
+                  <img src={pen} alt="Update" className="w-5 h-5" />
+                  Update Progress
                 </Link>
-
                 <button
                   onClick={() => handleDelete(_id)}
-                  className="no-underline flex items-center justify-center gap-[10px] rounded-[10px] p-[16px] bg-white border border-[#0585cd] cursor-pointer"
+                  className="flex items-center gap-2 px-4 py-3 rounded-lg border border-[#0585cd] text-[#0585cd] font-semibold text-base sm:text-lg hover:bg-[#f0faff] transition"
                 >
-                  <img src={can} alt="Delete icon" />
-                  <p className="font-montserrat font-semibold text-[20px] text-[#0585cd] m-0">Delete</p>
+                  <img src={can} alt="Delete" className="w-5 h-5" />
+                  Delete
                 </button>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
