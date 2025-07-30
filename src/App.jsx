@@ -9,10 +9,12 @@ import OngoingPage from "./pages/OngoingPage";
 import ProgressPage from "./pages/ProgressPage";
 import Error from "./pages/Error";
 import Navbar from "./components/Navbar";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <BrowserRouter>
+    <Toaster position="top-center" />
       <Navbar />
       <Routes>
         <Route path="/" element={<CoverPage />} />
@@ -20,7 +22,7 @@ function App() {
         <Route path="/complete" element={<CompletedPage />} />
         <Route path="/newgoal" element={<NewGoal />} />
         <Route path="/ongoing" element={<OngoingPage />} />
-        <Route path="/progress" element={<ProgressPage />} />
+        <Route path="/progress/:id" element={<ProgressPage />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
