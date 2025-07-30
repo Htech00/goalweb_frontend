@@ -129,7 +129,7 @@ const ProgressPage = () => {
 
           <button
             type="submit"
-            className="w-full max-w-xs bg-[#0585cd] hover:bg-[#0560a0] transition px-6 py-3 text-white text-lg font-semibold rounded-md"
+            className="w-full max-w-xs bg-[#0585cd] hover:bg-[#0560a0] transition px-6 py-3 text-white text-lg font-semibold rounded-md cursor-pointer"
           >
             Update Progress
           </button>
