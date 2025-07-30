@@ -12,7 +12,7 @@ const ProgressPage = () => {
   const fetchGoalById = async () => {
     try {
       const fetchEachGoal = await fetch(
-        `https://goalweb-backend-xt0f.onrender.com/api/goals/${id}`
+        `https://goalweb-backend-b094.onrender.com/api/goals/${id}`
       );
 
       if (fetchEachGoal.ok) {
@@ -33,7 +33,7 @@ const ProgressPage = () => {
     event.preventDefault();
     try {
       const patchedGoal = await fetch(
-        `https://goalweb-backend-xt0f.onrender.com/api/goals/${id}/progress`,
+        `https://goalweb-backend-b094.onrender.com/api/goals/${id}/progress`,
         {
           method: "PATCH",
           headers: {

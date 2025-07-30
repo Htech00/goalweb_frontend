@@ -10,8 +10,8 @@ const CompletedPage = () => {
 
   const fetchCompletedGoals = async () => {
     try {
-      const res = await fetch(
-        "https://goalweb-backend-xt0f.onrender.com/api/goals/completed"
+      const res = await fetch (
+        "https://goalweb-backend-b094.onrender.com/api/goals/completed"
       );
       const data = await res.json();
       setCompletedGoals(data);
@@ -25,7 +25,7 @@ const CompletedPage = () => {
   const handleDelete = async (id) => {
     try {
       await fetch(
-        `https://goalweb-backend-xt0f.onrender.com/api/goals/${id}/delete`,
+        `https://goalweb-backend-b094.onrender.com/api/goals/${id}/delete`,
         {
           method: "DELETE",
         }

@@ -10,7 +10,7 @@ const OngoingPage = () => {
 
   const fetchOngoingGoals = async () => {
     try {
-      const response = await fetch("https://goalweb-backend-xt0f.onrender.com/api/goals/ongoing");
+      const response = await fetch ("https://goalweb-backend-b094.onrender.com/api/goals/ongoing");
       const data = await response.json();
       setOngoingGoals(data);
     } catch (error) {
@@ -22,7 +22,7 @@ const OngoingPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`https://goalweb-backend-xt0f.onrender.com/api/goals/${id}/delete`, {
+      await fetch(`https://goalweb-backend-b094.onrender.com/api/goals/${id}/delete`, {
         method: "DELETE",
       });
       toast.success("Goal Deleted Successfully!", { duration: 5000 });

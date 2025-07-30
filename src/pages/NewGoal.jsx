@@ -16,7 +16,7 @@ const NewGoal = () => {
 
     try {
       const postNewGoal = await fetch(
-        "https://goalweb-backend-xt0f.onrender.com/api/goals",
+        "https://goalweb-backend-b094.onrender.com/api/goals",
         {
           method: "POST",
           headers: {
