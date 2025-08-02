@@ -8,9 +8,22 @@ const OngoingPage = () => {
   const [ongoingGoals, setOngoingGoals] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Get or generate userId from localStorage
+  const getUserId = () => {
+    let userId = localStorage.getItem("goalAppUserId");
+    if (!userId) {
+      userId = crypto.randomUUID();
+      localStorage.setItem("goalAppUserId", userId);
+    }
+    return userId;
+  };
+
   const fetchOngoingGoals = async () => {
+    const userId = getUserId();
     try {
-      const response = await fetch ("https://goalweb-backend-b094.onrender.com/api/goals/ongoing");
+      const response = await fetch(
+        `https://goalweb-backend-b094.onrender.com/api/goals/ongoing?userId=${userId}`
+      );
       const data = await response.json();
       setOngoingGoals(data);
     } catch (error) {
@@ -22,9 +35,12 @@ const OngoingPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`https://goalweb-backend-b094.onrender.com/api/goals/${id}/delete`, {
-        method: "DELETE",
-      });
+      await fetch(
+        `https://goalweb-backend-b094.onrender.com/api/goals/${id}/delete`,
+        {
+          method: "DELETE",
+        }
+      );
       toast.success("Goal Deleted Successfully!", { duration: 5000 });
       fetchOngoingGoals();
     } catch (error) {

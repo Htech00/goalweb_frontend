@@ -10,9 +10,27 @@ const NewGoal = () => {
 
   const navigate = useNavigate();
 
+  // Get or generate userId from localStorage
+  const getUserId = () => {
+    let userId = localStorage.getItem("goalAppUserId");
+    if (!userId) {
+      userId = crypto.randomUUID();
+      localStorage.setItem("goalAppUserId", userId);
+    }
+    return userId;
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const newGoal = { title, description, progress: Number(progress) };
+
+    const userId = getUserId();
+
+    const newGoal = {
+      title,
+      description,
+      progress: Number(progress),
+      userId, // Include userId in the body
+    };
 
     try {
       const postNewGoal = await fetch(
@@ -94,7 +112,6 @@ const NewGoal = () => {
           Create Goal
         </button>
       </form>
-
     </div>
   );
 };

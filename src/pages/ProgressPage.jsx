@@ -9,10 +9,20 @@ const ProgressPage = () => {
   const [newProgress, setNewProgress] = useState("");
   const navigate = useNavigate();
 
+  const getUserId = () => {
+    let userId = localStorage.getItem("goalAppUserId");
+    if (!userId) {
+      userId = crypto.randomUUID();
+      localStorage.setItem("goalAppUserId", userId);
+    }
+    return userId;
+  };
+
   const fetchGoalById = async () => {
+    const userId = getUserId();
     try {
       const fetchEachGoal = await fetch(
-        `https://goalweb-backend-b094.onrender.com/api/goals/${id}`
+        `https://goalweb-backend-b094.onrender.com/api/goals/${id}?userId=${userId}`
       );
 
       if (fetchEachGoal.ok) {
@@ -20,8 +30,9 @@ const ProgressPage = () => {
         setGoal(fetchedGoal);
         setNewProgress(fetchedGoal.progress);
       } else {
-        toast.error("Goal not found", { duration: 5000 });
-        console.error("Goal not found");
+        toast.error("Goal not found or you don't have access", { duration: 5000 });
+        console.error("Goal not found or access denied");
+        navigate("/allgoals"); // Redirect if goal is inaccessible
       }
     } catch (error) {
       toast.error("Error fetching goal", { duration: 5000 });
@@ -31,6 +42,8 @@ const ProgressPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const userId = getUserId();
+
     try {
       const patchedGoal = await fetch(
         `https://goalweb-backend-b094.onrender.com/api/goals/${id}/progress`,
@@ -39,9 +52,10 @@ const ProgressPage = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ progress: Number(newProgress) }),
+          body: JSON.stringify({ progress: Number(newProgress), userId }),
         }
       );
+
       if (patchedGoal.ok) {
         toast.success("Progress Updated Successfully!", { duration: 5000 });
         navigate("/allgoals");
@@ -61,7 +75,6 @@ const ProgressPage = () => {
 
   return (
     <div className="flex flex-col md:flex-row items-start gap-8 md:gap-12 lg:gap-16 my-12 px-4 sm:px-6 md:px-12 lg:px-24">
-      
       {/* Image section */}
       <div className="w-full md:w-1/2 lg:max-w-[400px] flex justify-center md:justify-start mb-8 md:mb-0">
         <img

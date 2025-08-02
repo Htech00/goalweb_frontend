@@ -8,10 +8,20 @@ const CompletedPage = () => {
   const [completedGoals, setCompletedGoals] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const getUserId = () => {
+    let userId = localStorage.getItem("goalAppUserId");
+    if (!userId) {
+      userId = crypto.randomUUID();
+      localStorage.setItem("goalAppUserId", userId);
+    }
+    return userId;
+  };
+
   const fetchCompletedGoals = async () => {
+    const userId = getUserId();
     try {
-      const res = await fetch (
-        "https://goalweb-backend-b094.onrender.com/api/goals/completed"
+      const res = await fetch(
+        `https://goalweb-backend-b094.onrender.com/api/goals/completed?userId=${userId}`
       );
       const data = await res.json();
       setCompletedGoals(data);

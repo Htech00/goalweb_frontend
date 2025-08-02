@@ -8,9 +8,23 @@ const AllGoals = () => {
   const [goals, setGoals] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Generate or fetch userId from localStorage
+  const getUserId = () => {
+    let userId = localStorage.getItem("goalAppUserId");
+    if (!userId) {
+      userId = crypto.randomUUID();
+      localStorage.setItem("goalAppUserId", userId);
+    }
+    return userId;
+  };
+
+  const userId = getUserId();
+
   const fetchGoals = async () => {
     try {
-      const res = await fetch("https://goalweb-backend-b094.onrender.com/api/goals/all");
+      const res = await fetch(
+        `https://goalweb-backend-b094.onrender.com/api/goals/all?userId=${userId}`
+      );
       const data = await res.json();
       setGoals(data);
     } catch (err) {
@@ -22,13 +36,21 @@ const AllGoals = () => {
 
   useEffect(() => {
     fetchGoals();
+    // eslint-disable-next-line
   }, []);
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`https://goalweb-backend-b094.onrender.com/api/goals/${id}/delete`, {
-        method: "DELETE",
-      });
+      await fetch(
+        `https://goalweb-backend-b094.onrender.com/api/goals/${id}/delete`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId }), // send userId in case your backend uses it
+        }
+      );
       fetchGoals();
       toast.success("Goal Deleted Successfully!", { duration: 5000 });
     } catch (error) {
