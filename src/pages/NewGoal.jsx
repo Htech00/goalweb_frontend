@@ -10,7 +10,7 @@ const NewGoal = () => {
 
   const navigate = useNavigate();
 
-  // Get or generate userId from localStorage
+  // Get or Create userId from localStorage 
   const getUserId = () => {
     let userId = localStorage.getItem("goalAppUserId");
     if (!userId) {

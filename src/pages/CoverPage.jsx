@@ -23,14 +23,7 @@ const CoverPage = () => {
         </h1>
 
         <p className="font-montserrat font-normal text-[16px] sm:text-[18px] lg:text-[20px] leading-relaxed tracking-wide text-black/80 m-0">
-          Lorem ipsum dolor sit amet consectetur. Ut nisl nisl cursus massa sed.
-          Turpis ac aliquet lacinia justo turpis amet at arcu. Diam vulputate
-          suspendisse aliquam enim sagittis cursiodio ultrices. Condimentum
-          lacus nunc rhoncus massa. Tortorstiu ultricies neque aliquam sit non.
-          Diam vehicula dignissimepei pellentesque eros vitae. Viverra in vitae
-          nunc lorem eget lciou imperdiet tortor. Ac mauris vel non amet eget
-          egestas inoriou pellentesque commodo amet. Facilisi sed ut nisi
-          pellentesque diam egestas et turpis donor amet.
+          The goal app functions like a to-do list, allowing users to add, manage, and track their personal or daily goals. It’s designed to help users stay focused, organized, and motivated. With a clean interface and simple features, it encourages productivity by making it easy to break down and achieve tasks.
         </p>
 
         <Link
