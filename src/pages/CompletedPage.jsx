@@ -33,18 +33,24 @@ const CompletedPage = () => {
   };
 
   const handleDelete = async (id) => {
+    const userId = localStorage.getItem("goalAppUserId");
+
     try {
       await fetch(
         `https://goalweb-backend-b094.onrender.com/api/goals/${id}/delete`,
         {
           method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId }), // <-- include userId
         }
       );
-      fetchCompletedGoals();
       toast.success("Goal Deleted Successfully!", { duration: 5000 });
+      fetchCompletedGoals();
     } catch (error) {
       toast.error("Failed to delete goal", { duration: 5000 });
-      console.error("Delete error:", error);
+      console.error("Failed to delete goal:", error);
     }
   };
 
@@ -62,13 +68,21 @@ const CompletedPage = () => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
           >
-            <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="10" />
+            <circle
+              cx="50"
+              cy="50"
+              r="45"
+              stroke="currentColor"
+              strokeWidth="10"
+            />
             <path
               d="M93 50a43 43 0 11-86 0 43 43 0 0186 0z"
               fill="currentFill"
             />
           </svg>
-          <span className="text-xl sm:text-2xl font-medium">Loading Completed Goals...</span>
+          <span className="text-xl sm:text-2xl font-medium">
+            Loading Completed Goals...
+          </span>
         </div>
       </div>
     );
@@ -116,8 +130,12 @@ const CompletedPage = () => {
               <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
                 <div className="w-full max-w-[368px] flex flex-col items-start gap-3">
                   <div className="flex justify-between w-full">
-                    <p className="font-montserrat text-sm sm:text-[16px] text-black/80 m-0">Progress</p>
-                    <p className="font-montserrat text-sm sm:text-[16px] text-black/80 m-0">{progress}%</p>
+                    <p className="font-montserrat text-sm sm:text-[16px] text-black/80 m-0">
+                      Progress
+                    </p>
+                    <p className="font-montserrat text-sm sm:text-[16px] text-black/80 m-0">
+                      {progress}%
+                    </p>
                   </div>
                   <div className="w-full bg-[#d9d9d9] h-3 rounded-full overflow-hidden">
                     <div

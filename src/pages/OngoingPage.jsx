@@ -34,11 +34,16 @@ const OngoingPage = () => {
   };
 
   const handleDelete = async (id) => {
+    const userId = localStorage.getItem("goalAppUserId");
     try {
       await fetch(
         `https://goalweb-backend-b094.onrender.com/api/goals/${id}/delete`,
         {
           method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId }), // <-- include userId
         }
       );
       toast.success("Goal Deleted Successfully!", { duration: 5000 });
@@ -63,10 +68,21 @@ const OngoingPage = () => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
           >
-            <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="10" />
-            <path d="M93 50a43 43 0 11-86 0 43 43 0 0186 0z" fill="currentFill" />
+            <circle
+              cx="50"
+              cy="50"
+              r="45"
+              stroke="currentColor"
+              strokeWidth="10"
+            />
+            <path
+              d="M93 50a43 43 0 11-86 0 43 43 0 0186 0z"
+              fill="currentFill"
+            />
           </svg>
-          <span className="text-xl sm:text-2xl font-medium">Loading Ongoing Goals...</span>
+          <span className="text-xl sm:text-2xl font-medium">
+            Loading Ongoing Goals...
+          </span>
         </div>
       </div>
     );
@@ -96,7 +112,9 @@ const OngoingPage = () => {
   return (
     <div className="px-4 sm:px-8 md:px-16 lg:px-[100px] py-8">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <h2 className="font-montserrat font-bold text-2xl sm:text-3xl lg:text-[36px] text-black">Ongoing</h2>
+        <h2 className="font-montserrat font-bold text-2xl sm:text-3xl lg:text-[36px] text-black">
+          Ongoing
+        </h2>
         <Link
           to="/newgoal"
           className="no-underline font-montserrat font-semibold text-[18px] sm:text-[20px] text-[#0585cd]"
@@ -136,7 +154,11 @@ const OngoingPage = () => {
                     style={{
                       width: `${progress}%`,
                       backgroundColor:
-                        progress < 50 ? "#ff0000cc" : progress < 70 ? "#fcca03" : "#339933",
+                        progress < 50
+                          ? "#ff0000cc"
+                          : progress < 70
+                          ? "#fcca03"
+                          : "#339933",
                     }}
                   ></div>
                 </div>
