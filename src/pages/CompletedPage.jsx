@@ -33,7 +33,7 @@ const CompletedPage = () => {
   };
 
   const handleDelete = async (id) => {
-    const userId = localStorage.getItem("goalAppUserId");
+    const userId = getUserId();
 
     try {
       await fetch(

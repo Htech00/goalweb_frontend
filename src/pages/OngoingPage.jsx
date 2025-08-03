@@ -34,7 +34,7 @@ const OngoingPage = () => {
   };
 
   const handleDelete = async (id) => {
-    const userId = localStorage.getItem("goalAppUserId");
+    const userId = getUserId();
     try {
       await fetch(
         `https://goalweb-backend-b094.onrender.com/api/goals/${id}/delete`,
