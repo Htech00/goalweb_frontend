@@ -58,8 +58,7 @@ const NewGoal = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-start gap-6 md:gap-10 my-12 mx-4 md:mx-12 lg:mx-24">
-
+    <div className="flex flex-col md:flex-row items-start gap-6 md:gap-10 my-12 mx-4 md:mx-12 lg:mx-24 bg-white">
       <span className="w-full md:w-1/2 lg:w-[400px] flex justify-center md:justify-start mt-8 md:mt-0">
         <img
           src={ladda}

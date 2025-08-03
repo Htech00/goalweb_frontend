@@ -82,7 +82,7 @@ const AllGoals = () => {
   }
 
   return (
-    <div className="px-4 sm:px-10 lg:px-[100px] my-8">
+    <div className="px-4 sm:px-10 lg:px-[100px] my-8 bg-white">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <h2 className="font-montserrat font-bold text-2xl sm:text-3xl lg:text-[36px] text-black m-0">
           All Goals
@@ -153,7 +153,7 @@ const AllGoals = () => {
                   </Link>
                   <button
                     onClick={() => handleDelete(_id)}
-                    className="no-underline flex items-center justify-center gap-2 rounded-[10px] p-4 bg-white border border-[#0585cd] text-[#0585cd] text-base font-semibold font-montserrat hover:bg-[#e6f4fb] transition"
+                    className="no-underline flex items-center justify-center gap-2 rounded-[10px] p-4 bg-white border border-[#0585cd] text-[#0585cd] text-base font-semibold font-montserrat hover:bg-[#e6f4fb] transition cursor-pointer"
                     aria-label="Delete goal"
                   >
                     <img src={can} alt="Delete Icon" className="w-5 h-5" />

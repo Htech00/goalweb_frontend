@@ -138,7 +138,7 @@ const CompletedPage = () => {
                   </Link>
                   <button
                     onClick={() => handleDelete(_id)}
-                    className="no-underline flex items-center justify-center gap-2 rounded-[10px] p-4 bg-white border border-[#0585cd] text-[#0585cd] text-base font-semibold font-montserrat hover:bg-[#e6f4fb] transition"
+                    className="no-underline flex items-center justify-center gap-2 rounded-[10px] p-4 bg-white border border-[#0585cd] text-[#0585cd] text-base font-semibold font-montserrat hover:bg-[#e6f4fb] transition cursor-pointer"
                     aria-label="Delete goal"
                   >
                     <img src={can} alt="Delete icon" className="w-5 h-5" />

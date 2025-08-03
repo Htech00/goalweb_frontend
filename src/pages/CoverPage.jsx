@@ -4,7 +4,7 @@ import girl from "../assets/bro.png";
 
 const CoverPage = () => {
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-[146px] px-4 sm:px-8 md:px-12 lg:px-[100px] py-10 lg:py-[58px]">
+    <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-[146px] px-4 sm:px-8 md:px-12 lg:px-[100px] py-10 lg:py-[58px] bg-white">
 
       {/* Illustration */}
       <div className="w-full lg:w-1/2 flex justify-center">

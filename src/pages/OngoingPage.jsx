@@ -153,7 +153,7 @@ const OngoingPage = () => {
                 </Link>
                 <button
                   onClick={() => handleDelete(_id)}
-                  className="flex items-center gap-2 px-4 py-3 rounded-lg border border-[#0585cd] text-[#0585cd] font-semibold text-base sm:text-lg hover:bg-[#f0faff] transition"
+                  className="flex items-center gap-2 px-4 py-3 rounded-lg border border-[#0585cd] text-[#0585cd] font-semibold text-base sm:text-lg hover:bg-[#f0faff] transition cursor-pointer"
                 >
                   <img src={can} alt="Delete" className="w-5 h-5" />
                   Delete
